@@ -9,7 +9,7 @@ export default function App() {
     <SafeAreaView style={styles.container}>
       <StatusBar style="light"/>
       <Header/>
-      <View style={{flex:1,justifyContent:'center',alignItems:'center'}}>
+      <View style={{flex:1,justifyContent:'center',alignItems:'center', overflow: 'hidden'}}>
         <Card/>
       </View>
      

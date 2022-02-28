@@ -1,6 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
 import { SafeAreaView, StyleSheet, Text, View } from 'react-native';
 import Header from './components/Header';
+import Card from './components/Card';
 
 
 export default function App() {
@@ -8,7 +9,9 @@ export default function App() {
     <SafeAreaView style={styles.container}>
       <StatusBar style="light"/>
       <Header/>
-      <Text style={{color:'white'}}>Open up App.js to start working on your app!</Text>
+      <View style={{flex:1,justifyContent:'center',alignItems:'center'}}>
+        <Card/>
+      </View>
      
     </SafeAreaView>
   );

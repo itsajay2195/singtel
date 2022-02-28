@@ -25,7 +25,7 @@ export default Header
 const styles = StyleSheet.create({
     container: {
         flexDirection: 'row', 
-        height: SIZES.height / 10, 
+        height: SIZES.height/10, 
         // backgroundColor: 'red', 
         alignItems: 'center', 
         justifyContent: 'space-between', 

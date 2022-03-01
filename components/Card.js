@@ -68,7 +68,6 @@ const Card = ({item,selected,setSelected,restart,orientation:{row,column}}) => {
 
     return (
         <View>
-            {console.log('orientation',row,column)}
             <>
                 <Animated.View style={[{ transform: [{ rotateY: interpolateFront }] }, styles.hidden]}>
                     <TouchableOpacity 

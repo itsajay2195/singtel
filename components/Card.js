@@ -3,7 +3,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import { SIZES, COLORS } from '../constants/theme'
 import { useDispatch } from 'react-redux'
 
-const Card = ({item,onPress,selected,setSelected,restart}) => {
+const Card = ({item,selected,setSelected,restart,orientation:{row,column}}) => {
     const dispatch = useDispatch();
     const animate = useRef(new Animated.Value(0))
     const [isFlipped, setIsFlipped] = useState(false)
@@ -46,7 +46,6 @@ const Card = ({item,onPress,selected,setSelected,restart}) => {
 
     
     const rotate = ()=>{
-        console.log('inside rotate')
         Animated.timing(animate.current, {
             duration: 300,
             toValue: isFlipped ? 0 : 180,
@@ -69,15 +68,26 @@ const Card = ({item,onPress,selected,setSelected,restart}) => {
 
     return (
         <View>
+            {console.log('orientation',row,column)}
             <>
                 <Animated.View style={[{ transform: [{ rotateY: interpolateFront }] }, styles.hidden]}>
-                    <TouchableOpacity style={styles.item} disabled={isFlipped} >
+                    <TouchableOpacity 
+                        style={[styles.item,
+                            {height: ( ( SIZES.height - SIZES.height / 10)  - (10 * 20)) / column,
+                            width: (SIZES.width - 105) / row,}]} 
+                        disabled={isFlipped} >
                         <Text style={{fontSize:SIZES.h3}}>Front</Text>
                     </TouchableOpacity>
                 </Animated.View>
                 <Animated.View style={[styles.back, styles.hidden, { transform: [{ rotateX: interpolateBack }] }]}>
-                    <TouchableOpacity style={[styles.item,{backgroundColor:COLORS.white}]} onPress={() => handleClick(item)} disabled={isFlipped} >
-                        <Text style={{fontSize:SIZES.h2}} >{item}</Text>
+                    <TouchableOpacity 
+                        style={[styles.item,
+                            {backgroundColor:COLORS.white,
+                            height: ( ( SIZES.height - SIZES.height / 10)  - (10 * 20)) / column,
+                            width: (SIZES.width - 105) / row,}]}
+                        onPress={() => handleClick(item)} 
+                        disabled={isFlipped} >
+                        <Text style={{fontSize:SIZES.h3}} >{item}</Text>
                     </TouchableOpacity>
                 </Animated.View>
             </>
@@ -89,8 +99,8 @@ export default Card
 
 const styles = StyleSheet.create({
     item: {
-        height: ( ( SIZES.height - SIZES.height / 10)  - (10 * 20)) / 4, //columns
-        width: (SIZES.width - 105) / 3, //rows
+        // height: ( ( SIZES.height - SIZES.height / 10)  - (10 * 20)) / column, //columns
+        // width: (SIZES.width - 105) / row, //rows
         backgroundColor:COLORS.primaryBlue,
         borderWidth: 2,
         borderColor: COLORS.white,

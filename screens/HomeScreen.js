@@ -12,6 +12,7 @@ const HomeScreen = () => {
     const dispatch = useDispatch();
     const counter = useSelector((state) => state.homeReducer.counter)
     const totalFlipped = useSelector((state) => state.homeReducer.totalFlipped)
+    const {row,column} = useSelector((state) => state.homeReducer.orientation)
     const [selected, setSelected] = useState(null)
     const [restart,setRestart]=useState(false)
     const [data,setData]=useState([])
@@ -19,8 +20,7 @@ const HomeScreen = () => {
     useEffect(()=>{
         //To restart the game
         dispatch({type:'RESET'})
-        setData(pairGenerator(2,2))
-    
+        setData(pairGenerator(row,column)) //this baically take 2 input params based on the visulaization of rows and columns we want the pairs to be displayed.   
     },[restart])
 
     useEffect(()=>{
@@ -40,8 +40,8 @@ const HomeScreen = () => {
                 <FlatList
                     data={data}
                     keyExtractor={(item) => item.id.toString()}
-                    numColumns={3}
-                    renderItem={({ item }) => <Card item={item.value}  selected={selected} setSelected={setSelected} restart={restart}/>}
+                    numColumns={column}
+                    renderItem={({ item }) => <Card item={item.value} orientation={{row,column}} selected={selected} setSelected={setSelected} restart={restart}/>}
                 />
             </View>
         </SafeAreaView>

@@ -7,22 +7,6 @@ import { useDispatch } from 'react-redux'
 import { useSelector } from 'react-redux'
 import { pairGenerator } from '../data/pairGenerator';
 
-const stub = [
-    { id: 3, value: 1 },
-    { id: 5, value: 2},
-    { id: 2, value: 3 },
-    { id: 4, value: 4 },
-    { id: 6, value: 5 },
-    { id: 1, value: 6 },
-    { id: 7, value: 6 },
-    { id: 12, value: 5 },
-    { id: 11, value: 4 },
-    { id: 8, value: 3 },
-    { id: 9, value: 2 },
-    { id: 10, value: 1 },
-
-]
-
 
 const HomeScreen = () => {
     const dispatch = useDispatch();
@@ -33,17 +17,16 @@ const HomeScreen = () => {
     const [data,setData]=useState([])
 
     useEffect(()=>{
+        //To restart the game
         dispatch({type:'RESET'})
         setData(pairGenerator(2,2))
-
-
+    
     },[restart])
 
-
-
     useEffect(()=>{
+        // This part is to check if the game is over. if over the congratulations alert will be displayed
        if(totalFlipped === data.length/totalFlipped){
-           Alert.alert("congratulations")
+           Alert.alert("congratulations","you have completed the game",[{text:"try another round",onPress:()=>setRestart(true)}])
        }
         
     },[totalFlipped]) 

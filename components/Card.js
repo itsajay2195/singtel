@@ -82,12 +82,6 @@ const Card = ({item,onPress,selected,setSelected,restart}) => {
                 </Animated.View>
             </>
         </View>
-
-
-
-
-
-
     )
 }
 
@@ -98,7 +92,8 @@ const styles = StyleSheet.create({
         height: ( ( SIZES.height - SIZES.height / 10)  - (10 * 20)) / 4, //columns
         width: (SIZES.width - 105) / 3, //rows
         backgroundColor:COLORS.primaryBlue,
-        borderWidth: 1,
+        borderWidth: 2,
+        borderColor: COLORS.white,
         borderRadius: 10, marginVertical: 5, marginHorizontal: 5,
         justifyContent: 'center',
         alignItems: 'center'

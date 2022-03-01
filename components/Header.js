@@ -13,7 +13,7 @@ const Header = ({steps,setRestart,restart}) => {
 
 
             <TouchableOpacity >
-                <Text style={styles.stepsText}>STEPS: <Text style={{color:COLORS.primaryBlue}}>{steps}</Text></Text>
+                <Text style={styles.stepsText}>STEPS: <Text style={{color:COLORS.primaryBlue,fontSize:SIZES.h1}}>{steps}</Text></Text>
             </TouchableOpacity>
 
         </View>
@@ -29,14 +29,14 @@ const styles = StyleSheet.create({
         // backgroundColor: 'red', 
         alignItems: 'center', 
         justifyContent: 'space-between', 
-        padding: SIZES.padding
+        paddingHorizontal: SIZES.padding
     },
     buttonRestartText:{
         color: COLORS.primaryBlue,
-        fontSize: SIZES.h2,
+        fontSize: SIZES.h3,
     },
     stepsText:{
         color: COLORS.white,
-        fontSize: SIZES.h1,
+        fontSize: SIZES.h2,
     }
 })

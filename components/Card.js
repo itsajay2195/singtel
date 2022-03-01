@@ -75,7 +75,7 @@ const Card = ({item,selected,setSelected,restart,orientation:{row,column}}) => {
                             {height: ( ( SIZES.height - SIZES.height / 10)  - (10 * 20)) / column,
                             width: (SIZES.width - 105) / row,}]} 
                         disabled={isFlipped} >
-                        <Text style={{fontSize:SIZES.h3}}>Front</Text>
+                        <Text style={{fontSize:SIZES.h1,color:COLORS.white}}>?</Text>
                     </TouchableOpacity>
                 </Animated.View>
                 <Animated.View style={[styles.back, styles.hidden, { transform: [{ rotateX: interpolateBack }] }]}>
@@ -101,7 +101,7 @@ const styles = StyleSheet.create({
         // height: ( ( SIZES.height - SIZES.height / 10)  - (10 * 20)) / column, //columns
         // width: (SIZES.width - 105) / row, //rows
         backgroundColor:COLORS.primaryBlue,
-        borderWidth: 2,
+        borderWidth: 3,
         borderColor: COLORS.white,
         borderRadius: 10, marginVertical: 5, marginHorizontal: 5,
         justifyContent: 'center',

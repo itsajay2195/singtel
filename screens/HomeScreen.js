@@ -26,7 +26,7 @@ const HomeScreen = () => {
     useEffect(()=>{
         // This part is to check if the game is over. if over the congratulations alert will be displayed
        if(totalFlipped === data.length/totalFlipped){
-           Alert.alert("congratulations","you have completed the game",[{text:"try another round",onPress:()=>setRestart(true)}])
+           Alert.alert("congratulations",`you win the game by ${counter} steps`,[{text:"try another round",onPress:()=>setRestart(!restart)}])
        }
         
     },[totalFlipped]) 

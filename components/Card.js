@@ -5,11 +5,12 @@ import { SIZES, COLORS } from '../constants/theme'
 
 const value = SIZES.height - SIZES.height / 10
 
-const Card = ({item}) => {
+const Card = ({item,onPress}) => {
     const animate = useRef(new Animated.Value(0))
     const [isFlipped, setIsFlipped] = useState(false)
 
     const handleFlip = () => {
+        onPress()
         Animated.timing(animate.current, {
             duration: 300,
             toValue: isFlipped ? 0 : 180,
@@ -35,7 +36,7 @@ const Card = ({item}) => {
         <View>
             <>
                 <Animated.View style={[{ transform: [{ rotateY: interpolateFront }] }, styles.hidden]}>
-                    <TouchableOpacity style={styles.item} onPress={() => handleFlip()}>
+                    <TouchableOpacity style={styles.item} >
                         <Text style={{fontSize:SIZES.h3}}>Front</Text>
                     </TouchableOpacity>
                 </Animated.View>

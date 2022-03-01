@@ -1,5 +1,5 @@
 let initialState = {
-    counter:0,
+    counter:10,
 };
 
 let homeReducer=(state=initialState,action)=>{

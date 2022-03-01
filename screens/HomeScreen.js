@@ -3,6 +3,8 @@ import { FlatList, SafeAreaView, StyleSheet, Text, View } from 'react-native';
 import Header from '../components/Header';
 import Card from '../components/Card';
 import React from 'react'
+import { useDispatch } from 'react-redux'
+import { useSelector } from 'react-redux'
 
 
 const data = [
@@ -23,16 +25,23 @@ const data = [
 
 
 const HomeScreen = () => {
+    const dispatch = useDispatch();
+    const counter = useSelector((state) => state.homeReducer.counter)
+    const  incrementCounter = () =>{
+        dispatch({type:'INCREMENT_COUNTER'})
+    }
+     
     return (
         <SafeAreaView style={styles.container}>
             <StatusBar style="light" />
-            <Header />
+            <Header steps={counter}/>
+            {console.warn(counter)}
             <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', overflow: 'hidden' }}>
                 <FlatList
                     data={data}
                     keyExtractor={(item) => item.id.toString()}
                     numColumns={3}
-                    renderItem={({ item }) => <Card item={item.value} />}
+                    renderItem={({ item }) => <Card item={item.value} onPress={incrementCounter}/>}
                 />
             </View>
         </SafeAreaView>

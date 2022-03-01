@@ -3,7 +3,7 @@ import { COLORS, SIZES } from '../constants/theme'
 import React from 'react'
 
 
-const Header = () => {
+const Header = ({steps}) => {
     return (
         <View style={styles.container}>
 
@@ -13,7 +13,7 @@ const Header = () => {
 
 
             <TouchableOpacity >
-                <Text style={styles.stepsText}>STEPS: <Text style={{color:COLORS.primaryBlue}}>0</Text></Text>
+                <Text style={styles.stepsText}>STEPS: <Text style={{color:COLORS.primaryBlue}}>{steps}</Text></Text>
             </TouchableOpacity>
 
         </View>

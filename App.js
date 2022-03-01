@@ -2,7 +2,11 @@ import { StatusBar } from 'expo-status-bar';
 import { FlatList, SafeAreaView, StyleSheet, Text, View } from 'react-native';
 import Header from './components/Header';
 import Card from './components/Card';
+import { Provider } from 'react-redux'
+import configureStore from './redux/store'
 
+
+const store =configureStore()
 
 export default function App() {
   const data = [
@@ -21,19 +25,21 @@ export default function App() {
 
 ]
   return (
-    <SafeAreaView style={styles.container}>
-      <StatusBar style="light"/>
-      <Header/>
-      <View style={{flex:1,justifyContent:'center',alignItems:'center', overflow: 'hidden'}}>
-        <FlatList
-            data={data}
-            keyExtractor={(item) => item.id.toString()}
-            numColumns={3}
-            renderItem={({ item }) => <Card item={item.value}/>}
-        />
-      </View>
-     
-    </SafeAreaView>
+    <Provider store={store}>
+      <SafeAreaView style={styles.container}>
+        <StatusBar style="light"/>
+        <Header/>
+        <View style={{flex:1,justifyContent:'center',alignItems:'center', overflow: 'hidden'}}>
+          <FlatList
+              data={data}
+              keyExtractor={(item) => item.id.toString()}
+              numColumns={3}
+              renderItem={({ item }) => <Card item={item.value}/>}
+          />
+        </View>
+      
+      </SafeAreaView>
+    </Provider>
   );
 }
 

@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import { FlatList, SafeAreaView, StyleSheet, Text, View, Alert } from 'react-native';
+import { FlatList, SafeAreaView, StyleSheet, ActivityIndicator, View, Alert } from 'react-native';
 import Header from '../components/Header';
 import Card from '../components/Card';
 import React,{useEffect, useState} from 'react'
@@ -16,11 +16,16 @@ const HomeScreen = () => {
     const [selected, setSelected] = useState(null)
     const [restart,setRestart]=useState(false)
     const [data,setData]=useState([])
+    const [loading,setLoading]=useState(false)
 
     useEffect(()=>{
         //To restart the game
+        setLoading(true)
         dispatch({type:'RESET'})
-        setData(pairGenerator(row,column)) //this baically take 2 input params based on the visulaization of rows and columns we want the pairs to be displayed.   
+        setData(pairGenerator(row,column)) //this baically take 2 input params based on the visulaization of rows and columns we want the pairs to be displayed. 
+        setTimeout(()=>{
+            setLoading(false)
+        },2000)  // adding the loading screen for 2 seconds deliberately to show the user that the game is loading.
     },[restart])
 
     useEffect(()=>{
@@ -33,16 +38,16 @@ const HomeScreen = () => {
 
     return (
         <SafeAreaView style={styles.container}>
-            {console.log('flipped are',totalFlipped)}
             <StatusBar style="light" />
             <Header steps={counter} restart ={restart} setRestart={setRestart} />
             <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', overflow: 'hidden' }}>
+                {loading ? <ActivityIndicator size="large" color="#0000ff" /> :
                 <FlatList
                     data={data}
                     keyExtractor={(item) => item.id.toString()}
                     numColumns={column}
                     renderItem={({ item }) => <Card item={item.value} orientation={{row,column}} selected={selected} setSelected={setSelected} restart={restart}/>}
-                />
+                />}
             </View>
         </SafeAreaView>
     )

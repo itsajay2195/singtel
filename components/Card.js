@@ -5,12 +5,38 @@ import { SIZES, COLORS } from '../constants/theme'
 
 const value = SIZES.height - SIZES.height / 10
 
-const Card = ({item,onPress}) => {
+const Card = ({item,onPress,selected,setSelected}) => {
     const animate = useRef(new Animated.Value(0))
     const [isFlipped, setIsFlipped] = useState(false)
 
-    const handleFlip = () => {
-        onPress()
+    const handleClick = (num) => {
+        onPress();
+        if (selected === null){
+            rotate();
+            setSelected(num)
+           
+        }else{
+            
+            if(selected === num){
+                rotate();
+                setSelected(null)
+                return
+            }
+            else{
+                rotate();
+                setTimeout(() => {
+                Animated.timing(animate.current, {
+                    duration: 300,
+                    toValue: 360,
+                    useNativeDriver: true,
+                }).start(()=>setIsFlipped(false))
+            },1000)}
+            return
+        }
+    }
+
+    const rotate = ()=>{
+        console.log('inside rotate')
         Animated.timing(animate.current, {
             duration: 300,
             toValue: isFlipped ? 0 : 180,
@@ -18,7 +44,6 @@ const Card = ({item,onPress}) => {
         }).start(() => {
             setIsFlipped(!isFlipped)
         })
-        console.log('im clicked')
     }
 
     const interpolateFront = animate.current.interpolate({
@@ -41,7 +66,7 @@ const Card = ({item,onPress}) => {
                     </TouchableOpacity>
                 </Animated.View>
                 <Animated.View style={[styles.back, styles.hidden, { transform: [{ rotateX: interpolateBack }] }]}>
-                    <TouchableOpacity style={[styles.item,{backgroundColor:COLORS.white}]} onPress={() => handleFlip()}>
+                    <TouchableOpacity style={[styles.item,{backgroundColor:COLORS.white}]} onPress={() => handleClick(item)}>
                         <Text style={{fontSize:SIZES.h2}} >{item}</Text>
                     </TouchableOpacity>
                 </Animated.View>

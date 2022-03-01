@@ -1,5 +1,5 @@
 let initialState = {
-    counter:10,
+    counter:0,
 };
 
 let homeReducer=(state=initialState,action)=>{
@@ -8,7 +8,11 @@ let homeReducer=(state=initialState,action)=>{
             let newState ={...state} 
             newState.counter = state.counter + 1;
             return newState
-
+        }
+        case 'RESET':{
+            let newState ={...state} 
+            newState.counter = 0;
+            return newState
         }
 
         default:

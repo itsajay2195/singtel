@@ -2,7 +2,7 @@ import { StatusBar } from 'expo-status-bar';
 import { FlatList, SafeAreaView, StyleSheet, Text, View } from 'react-native';
 import Header from '../components/Header';
 import Card from '../components/Card';
-import React from 'react'
+import React,{useState} from 'react'
 import { useDispatch } from 'react-redux'
 import { useSelector } from 'react-redux'
 
@@ -30,18 +30,18 @@ const HomeScreen = () => {
     const  incrementCounter = () =>{
         dispatch({type:'INCREMENT_COUNTER'})
     }
-     
+    const [selected, setSelected] = useState(null)
+    const [restart,setRestart]=useState(false)
     return (
         <SafeAreaView style={styles.container}>
             <StatusBar style="light" />
-            <Header steps={counter}/>
-            {console.warn(counter)}
+            <Header steps={counter} setRestart={setRestart} />
             <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', overflow: 'hidden' }}>
                 <FlatList
                     data={data}
                     keyExtractor={(item) => item.id.toString()}
                     numColumns={3}
-                    renderItem={({ item }) => <Card item={item.value} onPress={incrementCounter}/>}
+                    renderItem={({ item }) => <Card item={item.value} onPress={incrementCounter} selected={selected} setSelected={setSelected}/>}
                 />
             </View>
         </SafeAreaView>

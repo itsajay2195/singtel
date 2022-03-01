@@ -1,34 +1,15 @@
-let defaultState= {
-    selectedItems:{items:[],restaurantName:''}
-}
+let initialState = {
+    counter:0,
+};
 
-let homeReducer=(state=defaultState,action)=>{
+let homeReducer=(state=initialState,action)=>{
     switch(action.type){
-        case 'ADD_TO_CART':{
+        case 'INCREMENT_COUNTER':{
             let newState ={...state} 
-            if(action.payload.checkboxValue){
-                // console.warn("ADD TO CART")
-              
-                newState.selectedItems={
-                    items:[...newState.selectedItems.items,action.payload],
-                    restaurantName:action.payload.restaurantName
-                    }
-            }else{
-                // console.warn("REMOVE TO CART")
-                newState.selectedItems={
-                    items:[...newState.selectedItems.items.filter((item)=> item.title !== action.payload.title)],
-                    restaurantName:action.payload.restaurantName
-                }
+            newState.counter = state.counter + 1;
+            return newState
 
-            }
-            // console.warn('The sate is', newState)
-             return newState
-
-         }
-
-         
-
-            
+        }
 
         default:
             return state    
@@ -36,3 +17,4 @@ let homeReducer=(state=defaultState,action)=>{
 }
 
 export default homeReducer
+

@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import { FlatList, SafeAreaView, StyleSheet, Text, View } from 'react-native';
+import { FlatList, SafeAreaView, StyleSheet, Text, View, Alert } from 'react-native';
 import Header from '../components/Header';
 import Card from '../components/Card';
 import React,{useEffect, useState} from 'react'
@@ -27,23 +27,30 @@ const stub = [
 const HomeScreen = () => {
     const dispatch = useDispatch();
     const counter = useSelector((state) => state.homeReducer.counter)
-    const  incrementCounter = () =>{
-        dispatch({type:'INCREMENT_COUNTER'})
-    }
+    const totalFlipped = useSelector((state) => state.homeReducer.totalFlipped)
     const [selected, setSelected] = useState(null)
     const [restart,setRestart]=useState(false)
     const [data,setData]=useState([])
-    const [isFlipped, setIsFlipped] = useState(false)
 
     useEffect(()=>{
-        setData([])
+        dispatch({type:'RESET'})
         setData(pairGenerator(2,2))
+
 
     },[restart])
 
 
+
+    useEffect(()=>{
+       if(totalFlipped === data.length/totalFlipped){
+           Alert.alert("congratulations")
+       }
+        
+    },[totalFlipped]) 
+
     return (
         <SafeAreaView style={styles.container}>
+            {console.log('flipped are',totalFlipped)}
             <StatusBar style="light" />
             <Header steps={counter} restart ={restart} setRestart={setRestart} />
             <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', overflow: 'hidden' }}>
@@ -51,7 +58,7 @@ const HomeScreen = () => {
                     data={data}
                     keyExtractor={(item) => item.id.toString()}
                     numColumns={3}
-                    renderItem={({ item }) => <Card item={item.value} onPress={incrementCounter} selected={selected} setSelected={setSelected} restart={restart}/>}
+                    renderItem={({ item }) => <Card item={item.value}  selected={selected} setSelected={setSelected} restart={restart}/>}
                 />
             </View>
         </SafeAreaView>

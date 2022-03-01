@@ -1,20 +1,18 @@
 import { Animated, FlatList, StyleSheet, Text, TouchableOpacity, View, Button } from 'react-native'
 import React, { useEffect, useRef, useState } from 'react'
 import { SIZES, COLORS } from '../constants/theme'
-
-
-const value = SIZES.height - SIZES.height / 10
+import { useDispatch } from 'react-redux'
 
 const Card = ({item,onPress,selected,setSelected,restart}) => {
+    const dispatch = useDispatch();
     const animate = useRef(new Animated.Value(0))
     const [isFlipped, setIsFlipped] = useState(false)
 
     const handleClick = (num) => {
-        onPress();
+        dispatch({type:'INCREMENT_COUNTER'})
         if (selected === null){
             rotate();
             setSelected(num)
-           
         }else{
             // this piece of code will be excuted when the user is already in search for a match and clicks on another card
 
@@ -22,6 +20,7 @@ const Card = ({item,onPress,selected,setSelected,restart}) => {
                 // this piece of code will be excuted when the user clicks on the card with a matching number
                 rotate(); // this will rotate the card to 180 degrees
                 setSelected(null)// clearing the exising selected card
+                dispatch({type:'INCREMENT_FLIPPED'})
                 return
             }
             else{
@@ -45,6 +44,7 @@ const Card = ({item,onPress,selected,setSelected,restart}) => {
         
     },[restart])
 
+    
     const rotate = ()=>{
         console.log('inside rotate')
         Animated.timing(animate.current, {
@@ -71,12 +71,12 @@ const Card = ({item,onPress,selected,setSelected,restart}) => {
         <View>
             <>
                 <Animated.View style={[{ transform: [{ rotateY: interpolateFront }] }, styles.hidden]}>
-                    <TouchableOpacity style={styles.item} >
+                    <TouchableOpacity style={styles.item} disabled={isFlipped} >
                         <Text style={{fontSize:SIZES.h3}}>Front</Text>
                     </TouchableOpacity>
                 </Animated.View>
                 <Animated.View style={[styles.back, styles.hidden, { transform: [{ rotateX: interpolateBack }] }]}>
-                    <TouchableOpacity style={[styles.item,{backgroundColor:COLORS.white}]} onPress={() => handleClick(item)}>
+                    <TouchableOpacity style={[styles.item,{backgroundColor:COLORS.white}]} onPress={() => handleClick(item)} disabled={isFlipped} >
                         <Text style={{fontSize:SIZES.h2}} >{item}</Text>
                     </TouchableOpacity>
                 </Animated.View>

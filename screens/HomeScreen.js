@@ -2,12 +2,12 @@ import { StatusBar } from 'expo-status-bar';
 import { FlatList, SafeAreaView, StyleSheet, Text, View } from 'react-native';
 import Header from '../components/Header';
 import Card from '../components/Card';
-import React,{useState} from 'react'
+import React,{useEffect, useState} from 'react'
 import { useDispatch } from 'react-redux'
 import { useSelector } from 'react-redux'
+import { pairGenerator } from '../data/pairGenerator';
 
-
-const data = [
+const stub = [
     { id: 3, value: 1 },
     { id: 5, value: 2},
     { id: 2, value: 3 },
@@ -32,16 +32,26 @@ const HomeScreen = () => {
     }
     const [selected, setSelected] = useState(null)
     const [restart,setRestart]=useState(false)
+    const [data,setData]=useState([])
+    const [isFlipped, setIsFlipped] = useState(false)
+
+    useEffect(()=>{
+        setData([])
+        setData(pairGenerator(2,2))
+
+    },[restart])
+
+
     return (
         <SafeAreaView style={styles.container}>
             <StatusBar style="light" />
-            <Header steps={counter} setRestart={setRestart} />
+            <Header steps={counter} restart ={restart} setRestart={setRestart} />
             <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', overflow: 'hidden' }}>
                 <FlatList
                     data={data}
                     keyExtractor={(item) => item.id.toString()}
                     numColumns={3}
-                    renderItem={({ item }) => <Card item={item.value} onPress={incrementCounter} selected={selected} setSelected={setSelected}/>}
+                    renderItem={({ item }) => <Card item={item.value} onPress={incrementCounter} selected={selected} setSelected={setSelected} restart={restart}/>}
                 />
             </View>
         </SafeAreaView>

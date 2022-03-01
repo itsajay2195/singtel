@@ -3,11 +3,11 @@ import { COLORS, SIZES } from '../constants/theme'
 import React from 'react'
 
 
-const Header = ({steps}) => {
+const Header = ({steps,setRestart,restart}) => {
     return (
         <View style={styles.container}>
 
-            <TouchableOpacity >
+            <TouchableOpacity onPress={()=>setRestart(!restart)} >
                 <Text style={styles.buttonRestartText}>Restart</Text>
             </TouchableOpacity>
 

@@ -6,13 +6,13 @@ import React from 'react'
 const Header = ({steps,setRestart,restart}) => {
     return (
         <View style={styles.container}>
-            <TouchableOpacity onPress={()=>setRestart(!restart)} >
+            <TouchableOpacity onPress={()=>setRestart(!restart)} testID={`restart-btn-to`} >
                 <Text style={styles.buttonRestartText}>Restart</Text>
             </TouchableOpacity>
 
 
             <View >
-                <Text style={styles.stepsText}>STEPS: <Text style={{color:COLORS.primaryBlue,fontSize:SIZES.h1}}>{steps}</Text></Text>
+                <Text style={styles.stepsText} testID={`steps-text`}>STEPS: <Text style={{color:COLORS.primaryBlue,fontSize:SIZES.h1}} testID={`steps-counter`}>{steps}</Text></Text>
             </View>
 
         </View>

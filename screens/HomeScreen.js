@@ -37,6 +37,8 @@ const HomeScreen = () => {
         
     },[totalFlipped]) 
 
+    
+
     return (
         <SafeAreaView style={styles.container}>
             <StatusBar style="light" />
@@ -51,7 +53,7 @@ const HomeScreen = () => {
                     scrollEnabled={false}
                     keyExtractor={(item) => item.id.toString()}
                     numColumns={column}
-                    renderItem={({ item }) => <Card item={item.value} orientation={{row,column}} selected={selected} setSelected={setSelected} restart={restart}/>}
+                    renderItem={({ item,index }) => <Card item={item.value} index ={index} orientation={{row,column}} selected={selected} setSelected={setSelected} restart={restart}/>}
                 />}
             </View>
         </SafeAreaView>

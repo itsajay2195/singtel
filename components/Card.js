@@ -3,7 +3,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import { SIZES, COLORS } from '../constants/theme'
 import { useDispatch } from 'react-redux'
 
-const Card = ({item,selected,setSelected,restart,orientation:{row,column}}) => {
+const Card = ({item,selected,setSelected,restart,index,orientation:{row,column}}) => {
     const dispatch = useDispatch();
     const animate = useRef(new Animated.Value(0))
     const [isFlipped, setIsFlipped] = useState(false)
@@ -67,7 +67,7 @@ const Card = ({item,selected,setSelected,restart,orientation:{row,column}}) => {
 
 
     return (
-        <View>
+        <View testID={`card-${index}`}>
             <>
                 <Animated.View style={[{ transform: [{ rotateY: interpolateFront }] }, styles.hidden]}>
                     <TouchableOpacity 

@@ -1,4 +1,4 @@
-import { Animated, FlatList, StyleSheet, Text, TouchableOpacity, View, Button } from 'react-native'
+import { Animated, FlatList, StyleSheet, Text, TouchableOpacity, View, Platform } from 'react-native'
 import React, { useEffect, useRef, useState } from 'react'
 import { SIZES, COLORS } from '../constants/theme'
 import { useDispatch } from 'react-redux'
@@ -72,8 +72,8 @@ const Card = ({item,selected,setSelected,restart,orientation:{row,column}}) => {
                 <Animated.View style={[{ transform: [{ rotateY: interpolateFront }] }, styles.hidden]}>
                     <TouchableOpacity 
                         style={[styles.item,
-                            {height: ( ( SIZES.height - SIZES.height / 10)  - (10 * 20)) / column,
-                            width: (SIZES.width - 105) / row,}]} 
+                            {height: ( ( SIZES.height - SIZES.height / 10)  - (10 * 20)) / row, 
+                            width: (SIZES.width - 105) / column}]} 
                         disabled={isFlipped} >
                         <Text style={{fontSize:SIZES.h1,color:COLORS.white}}>?</Text>
                     </TouchableOpacity>
@@ -82,8 +82,8 @@ const Card = ({item,selected,setSelected,restart,orientation:{row,column}}) => {
                     <TouchableOpacity 
                         style={[styles.item,
                             {backgroundColor:COLORS.white,
-                            height: ( ( SIZES.height - SIZES.height / 10)  - (10 * 20)) / column,
-                            width: (SIZES.width - 105) / row,}]}
+                            height: ( ( SIZES.height - SIZES.height / 10)  - (10 * 20)) / row,
+                            width: (SIZES.width - 105) / column,}]}
                         onPress={() => handleClick(item)} 
                         disabled={isFlipped} >
                         <Text style={{fontSize:SIZES.h3}} >{item}</Text>

@@ -30,7 +30,7 @@ const HomeScreen = () => {
 
     useEffect(()=>{
         // This part is to check if the game is over. if over the congratulations alert will be displayed
-       if(totalFlipped === data.length/totalFlipped){
+       if(totalFlipped>0 && totalFlipped === data.length/2){
            Alert.alert("congratulations",`you win the game by ${counter} steps`,[{text:"try another round",onPress:()=>setRestart(!restart)}])
        }
         
@@ -39,11 +39,15 @@ const HomeScreen = () => {
     return (
         <SafeAreaView style={styles.container}>
             <StatusBar style="light" />
-            <Header steps={counter} restart ={restart} setRestart={setRestart} />
+            <View style={{paddingTop: Platform.OS === 'android' ? 25 : 0}}>  
+                 <Header steps={counter} restart ={restart} setRestart={setRestart} />
+            </View>
+            
             <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', overflow: 'hidden' }}>
                 {loading ? <ActivityIndicator size="large" color="#0000ff" /> :
                 <FlatList
                     data={data}
+                    scrollEnabled={false}
                     keyExtractor={(item) => item.id.toString()}
                     numColumns={column}
                     renderItem={({ item }) => <Card item={item.value} orientation={{row,column}} selected={selected} setSelected={setSelected} restart={restart}/>}

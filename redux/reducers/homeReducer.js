@@ -1,6 +1,6 @@
 let initialState = {
     counter:0,
-    orientation:{row:2,column:2},
+    orientation:{row:4,column:3},
     totalFlipped:0
 };
 

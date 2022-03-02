@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native'
+import { StyleSheet, Text, View, TouchableOpacity,SafeAreaView } from 'react-native'
 import { COLORS, SIZES } from '../constants/theme'
 import React from 'react'
 
@@ -6,7 +6,6 @@ import React from 'react'
 const Header = ({steps,setRestart,restart}) => {
     return (
         <View style={styles.container}>
-
             <TouchableOpacity onPress={()=>setRestart(!restart)} >
                 <Text style={styles.buttonRestartText}>Restart</Text>
             </TouchableOpacity>
@@ -26,10 +25,9 @@ const styles = StyleSheet.create({
     container: {
         flexDirection: 'row', 
         height: SIZES.height/10, 
-        // backgroundColor: 'red', 
         alignItems: 'center', 
         justifyContent: 'space-between', 
-        paddingHorizontal: SIZES.padding
+        paddingHorizontal: SIZES.padding,
     },
     buttonRestartText:{
         color: COLORS.primaryBlue,

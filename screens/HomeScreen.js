@@ -6,6 +6,7 @@ import React,{useEffect, useState} from 'react'
 import { useDispatch } from 'react-redux'
 import { useSelector } from 'react-redux'
 import { pairGenerator } from '../data/pairGenerator';
+import { COLORS } from '../constants/theme';
 
 
 const HomeScreen = () => {
@@ -44,7 +45,7 @@ const HomeScreen = () => {
             </View>
             
             <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', overflow: 'hidden' }}>
-                {loading ? <ActivityIndicator size="large" color="#0000ff" /> :
+                {loading ? <ActivityIndicator size="large" color={COLORS.primaryBlue} /> :
                 <FlatList
                     data={data}
                     scrollEnabled={false}

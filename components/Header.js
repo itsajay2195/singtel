@@ -11,9 +11,9 @@ const Header = ({steps,setRestart,restart}) => {
             </TouchableOpacity>
 
 
-            <TouchableOpacity >
+            <View >
                 <Text style={styles.stepsText}>STEPS: <Text style={{color:COLORS.primaryBlue,fontSize:SIZES.h1}}>{steps}</Text></Text>
-            </TouchableOpacity>
+            </View>
 
         </View>
     )

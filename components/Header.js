@@ -10,7 +10,6 @@ const Header = ({steps,setRestart,restart}) => {
                 <Text style={styles.buttonRestartText}>Restart</Text>
             </TouchableOpacity>
 
-
             <View >
                 <Text style={styles.stepsText} testID={`steps-text`}>STEPS: <Text style={{color:COLORS.primaryBlue,fontSize:SIZES.h1}} testID={`steps-counter`}>{steps}</Text></Text>
             </View>

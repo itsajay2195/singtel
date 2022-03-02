@@ -98,8 +98,6 @@ export default Card
 
 const styles = StyleSheet.create({
     item: {
-        // height: ( ( SIZES.height - SIZES.height / 10)  - (10 * 20)) / column, //columns
-        // width: (SIZES.width - 105) / row, //rows
         backgroundColor:COLORS.primaryBlue,
         borderWidth: 3,
         borderColor: COLORS.white,

@@ -23,16 +23,19 @@ function shuffle(array) {
   
 export const pairGenerator =(row,col)=>{
     var NUM_OF_SQUARES = row * col;
-    console.log(NUM_OF_SQUARES);
+  
     var RANDOM_NUMBERS = [];
+
     while(RANDOM_NUMBERS.length <= (NUM_OF_SQUARES/2) -1 ){
         var r = Math.floor(Math.random() * 100) + 1;
-        // console.log("before the if", r);
         if(RANDOM_NUMBERS.indexOf(r) === -1) RANDOM_NUMBERS.push(r);
     }
-    console.log(RANDOM_NUMBERS);
+
+   
     data = shuffle(RANDOM_NUMBERS.concat(RANDOM_NUMBERS));
+
     CARD_PAIRS_VALUE = data.map((el,i)=>({id:i+1,value:el,flipped:false}));
+
     return CARD_PAIRS_VALUE;
   }
   

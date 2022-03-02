@@ -37,11 +37,12 @@ const HomeScreen = () => {
         
     },[totalFlipped]) 
 
-    
+
 
     return (
         <SafeAreaView style={styles.container}>
             <StatusBar style="light" />
+
             <View style={{paddingTop: Platform.OS === 'android' ? 25 : 0}}>  
                  <Header steps={counter} restart ={restart} setRestart={setRestart} />
             </View>
@@ -56,6 +57,7 @@ const HomeScreen = () => {
                     renderItem={({ item,index }) => <Card item={item.value} index ={index} orientation={{row,column}} selected={selected} setSelected={setSelected} restart={restart}/>}
                 />}
             </View>
+            
         </SafeAreaView>
     )
 }
